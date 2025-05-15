@@ -12,3 +12,26 @@ CREATE TABLE movimentacoes_bancarias (
     identificador_operacao VARCHAR(50),
     descricao TEXT
 );
+
+
+
+CREATE TABLE categorias (
+    id SERIAL PRIMARY KEY,
+    descricao TEXT NOT NULL,
+    categoria_pai_id INTEGER,
+    
+    CONSTRAINT fk_categoria_pai
+        FOREIGN KEY (categoria_pai_id)
+        REFERENCES categorias(id)
+        ON DELETE SET NULL
+);
+
+
+
+
+-- Categoria pai
+INSERT INTO categorias (descricao) VALUES ('Alimentação');
+
+-- Subcategoria
+INSERT INTO categorias (descricao, categoria_pai_id) VALUES ('Restaurantes', 1);
+
